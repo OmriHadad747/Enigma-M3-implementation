@@ -46,5 +46,35 @@ class Enigma:
     def createReflector():
         return Reflector(list("YRUHQSLDPXNGOKMIEBFZCWVJAT"))
 
-    #def encryptLetter(self, letter):
+    def changeDir(self):
+        self.selectedRotors[self.rRotor].changeDirection()
+        self.selectedRotors[self.mRotor].changeDirection()
+        self.selectedRotors[self.lRotor].changeDirection()
 
+    def encryptLetter(self, letter):
+        self.selectedRotors[self.rRotor].step()
+
+        # turnover and double step logic
+        if self.selectedRotors[self.rRotor].isTurnover():
+            self.selectedRotors[self.mRotor].step()
+            if self.selectedRotors[self.mRotor].isTurnover():
+                self.selectedRotors[self.lRotor].step()
+
+        # forward direction translation
+        letter = self.plugboard.translation(letter)
+        letter = self.selectedRotors[self.rRotor].translation(letter)
+        letter = self.selectedRotors[self.mRotor].translation(letter)
+        letter = self.selectedRotors[self.lRotor].translation(letter)
+        letter = self.reflector.translation(letter)
+
+        self.changeDir()
+
+        # reverse direction translation
+        letter = self.selectedRotors[self.lRotor].translation(letter)
+        letter = self.selectedRotors[self.mRotor].translation(letter)
+        letter = self.selectedRotors[self.rRotor].translation(letter)
+        letter = self.plugboard.translation(letter)
+
+        self.changeDir()
+
+        return letter

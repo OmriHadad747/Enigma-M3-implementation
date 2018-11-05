@@ -1,7 +1,11 @@
 
-class Translator():
+# this class charge on letter to index and index to letter operation included circular shifts
+class Translator:
 
-    def forwardTranslation(self):
+    def __init__(self):
+        pass
+
+    def translation(self):
         pass
 
     def reverseTranslation(self):
@@ -9,20 +13,15 @@ class Translator():
 
     @staticmethod
     def letterToIndex(letter):
-        letter = map(ord, letter)
-        constLetter = map(ord, 'A')
-        return letter[0] - constLetter[0]
+        num = ord(letter)
+        return num - ord('A')
 
     @staticmethod
     def indexToLetter(index):
-        return index + 'A'
+        return chr(index + ord('A'))
 
     def circularShifts(self, letter, index):
         if index < 0:
             index += 26
+
         return self.indexToLetter((self.letterToIndex(letter) + index) % 26)
-
-
-
-
-

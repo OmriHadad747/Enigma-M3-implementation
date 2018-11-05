@@ -4,7 +4,9 @@ class Plugboard(Translator):
 
     def __init__(self, pbConfiguration):
         self.permutation = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        self.setConfiguration(pbConfiguration)
 
+    def setConfiguration(self, pbConfiguration):
         if len(pbConfiguration) > 0:
             for pair in pbConfiguration:
                 firstLetter = pair[0]
@@ -14,12 +16,6 @@ class Plugboard(Translator):
                 self.permutation[firstIndex] = secondLetter
                 self.permutation[secondIndex] = firstLetter
 
+    def translation(self, letter):
+        return self.permutation[Translator.letterToIndex(letter)]
 
-        print "plugboard permutation: "
-        print self.permutation
-
-    def forwardTranslation(self, letter):
-        self.permutation[Translator.letterToIndex(letter)]
-
-    def reverseTranslation(self):
-        pass
