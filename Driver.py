@@ -1,23 +1,42 @@
+import sys
 from Enigma import Enigma
 
-def encryptLetter():
-    while True:
-        letter = raw_input("Enter Letter: ")
-        encryptedLetter = enigma.encryptLetter(letter)
-        print "encrypted letter: "
-        print encryptedLetter
+while True:
+    print '\n' * 40
+    enigma = Enigma(0, 0, 0, 1, 0, 0, 2, 0, 0, [('A', 'C')])  # enigma machine creation
+    input = raw_input("Enigma M3 Machine\n"
+                      "=================\n"
+                      "To Encrypt Full Message Enter-M\n"
+                      "To Encrypt Single Letter Enter-L\n"
+                      "To Exit Enter-E\n"
+                      "-->:")
+    if input == 'M':  # char M for message encryption
+        print '\n' * 40
+        while True:
+            message = raw_input("\nTo Go Back Enter-1\n"
+                                "Enter Message: ")
+            if message == "1":
+                break
 
-def encryptMessage():
-    message = raw_input("Enter Message: ")
-    for letter in message:
-        print encryptLetter(letter)
+            encryptedMessage = ''
+            for letter in message:
+                encryptedMessage += enigma.encryptLetter(letter)
+            print "Encrypted Message:",encryptedMessage
 
-enigma = Enigma(0, 0, 0, 1, 0, 0, 2, 0, 0, [('A', 'C')])
-input = raw_input("Encrypt A Full Message Enter-0 \ Encrypt A Single Letter-1: ")
-if input == 0:
-    encryptMessage()
-elif input == 1:
-    encryptLetter()
+    elif input == 'L':  # char L for letter encryption
+        print '\n'*40
+        while True:
+            letter = raw_input("\nTo Go Back Enter-1\n"
+                               "Enter Letter:")
+            if letter == "1":
+                break
+
+            encryptedLetter = enigma.encryptLetter(letter)
+            print "encrypted letter:", encryptedLetter
+
+    elif input == 'E':  # char E for exit from the program
+        sys.exit(0)
+
 
 
 
