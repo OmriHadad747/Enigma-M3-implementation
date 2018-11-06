@@ -1,10 +1,18 @@
 import sys
 from Enigma import Enigma
+import cProfile
 
 while True:
     print '\n' * 40
+
+    # profiling to the while loop
+    profile = cProfile.Profile()
+    profile.enable()
+
     # Enigma(right rotor number, right rotor setting, right rotor offset, middle rotor number, ...., optional 10 pairs to plugboard)
-    enigma = Enigma(4, 6, 9, 2, 8, 4, 1, 3, 19, [('A', 'T'), ('C', 'E'), ('R', 'L')])  # enigma machine creation
+    enigma = Enigma(3, 1, 1, 2, 1, 1, 1, 1, 1, [('A', 'T'), ('C', 'E'), ('R', 'L')])  # enigma machine creation
+
+    # user interface handling
     input = raw_input("Enigma M3 Machine\n"
                       "=================\n"
                       "To Encrypt Full Message Enter-M\n"
@@ -22,7 +30,7 @@ while True:
             encryptedMessage = ''
             for letter in message:
                 encryptedMessage += enigma.encryptLetter(letter)
-            print "Encrypted Message:",encryptedMessage
+            print "Encrypted Message:", encryptedMessage
 
     elif input == 'L':  # char L for letter encryption
         print '\n'*40
@@ -38,6 +46,10 @@ while True:
     elif input == 'E':  # char E for exit from the program
         sys.exit(0)
 
+    profile.disable()
+    print '\n' * 40
+    profile.print_stats(sort='time')
+    break
 
 
 
