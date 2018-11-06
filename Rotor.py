@@ -30,14 +30,15 @@ class Rotor(Translator):
 
     # encrypt a given letter
     def translation(self, letter):
-        shift = self.circularShifts(letter, self.offset - self.setting)
-        if self.direction == 'REVERSE':
-            convert = self.reversePermutation[Translator.letterToIndex(shift)]
-        else:
-            convert = self.permutation[Translator.letterToIndex(shift)]
+        toEncrypt1 = self.circularShifts(letter, self.offset - self.setting)
 
-        shift = self.circularShifts(convert, (self.setting - 1) - (self.offset - 1))
-        return shift
+        if self.direction == 'REVERSE':
+            toEncrypt2 = self.reversePermutation[Translator.letterToIndex(toEncrypt1)]
+        else:
+            toEncrypt2 = self.permutation[Translator.letterToIndex(toEncrypt1)]
+
+        encrypted = self.circularShifts(toEncrypt2, (self.setting - 1) - (self.offset - 1))
+        return encrypted
 
     def step(self):
         if self.offset == 25:
