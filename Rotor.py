@@ -10,7 +10,7 @@ class Rotor(Translator):
         self.permutation = permutation
         self.reversePermutation = [0] * self.SIZE
         self.reverseTranslation()  # create reverse translation from forward permutation
-        self.turnOver = Translator.letterToIndex(turnOver)
+        self.turnOver = Translator.letterToIndex(turnOver) + 1
         self.setting = 0
         self.offset = 0
 
@@ -37,11 +37,11 @@ class Rotor(Translator):
         else:
             toEncrypt2 = self.permutation[Translator.letterToIndex(toEncrypt1)]
 
-        encrypted = self.circularShifts(toEncrypt2, (self.setting - 1) - (self.offset - 1))
+        encrypted = self.circularShifts(toEncrypt2, (self.setting - 1) - (self.offset-1))
         return encrypted
 
     def step(self):
-        if self.offset == 25:
+        if self.offset == 26:
             self.offset = 0
         self.offset += 1
 

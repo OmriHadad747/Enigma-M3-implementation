@@ -3,7 +3,8 @@ from Enigma import Enigma
 
 while True:
     print '\n' * 40
-    enigma = Enigma(0, 0, 0, 1, 0, 0, 2, 0, 0, [('A', 'C')])  # enigma machine creation
+    # Enigma(right rotor number, right rotor setting, right rotor offset, middle rotor number, ...., optional 10 pairs to plugboard)
+    enigma = Enigma(4, 6, 9, 2, 8, 4, 1, 3, 19, [('A', 'T'), ('C', 'E'), ('R', 'L')])  # enigma machine creation
     input = raw_input("Enigma M3 Machine\n"
                       "=================\n"
                       "To Encrypt Full Message Enter-M\n"
