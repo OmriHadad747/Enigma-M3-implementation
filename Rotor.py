@@ -42,7 +42,7 @@ class Rotor(Translator):
 
     def step(self):
         if self.offset == 26:
-            self.offset = 0
+            self.offset = 1
         self.offset += 1
 
     def isTurnover(self):

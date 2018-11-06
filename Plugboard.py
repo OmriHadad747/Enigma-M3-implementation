@@ -4,7 +4,7 @@ from Translator import Translator
 
 class Plugboard(Translator):
 
-    def __init__(self, pbConfiguration = None):
+    def __init__(self, pbConfiguration):
         self.permutation = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         self.setConfiguration(pbConfiguration)
 
