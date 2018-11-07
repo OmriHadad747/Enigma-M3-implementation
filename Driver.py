@@ -3,8 +3,6 @@ from Enigma import Enigma
 import cProfile
 
 while True:
-    print '\n' * 40
-
     # profiling to the while loop
     profile = cProfile.Profile()
     profile.enable()
@@ -16,44 +14,24 @@ while True:
                     [('Z','U'),('H','L'),('C','Q'),('W','M'),('O','A'),('P','Y'),('E','B'),('T','R'),('D','N'),('V','I')])  # optional 10 pairs to plugboard
 
     # user interface handling
-    input = raw_input("Enigma M3 Machine\n"
-                      "=================\n"
-                      "To Encrypt Full Message Enter-M\n"
-                      "To Encrypt Single Letter Enter-L\n"
-                      "To Exit Enter-E\n"
-                      "-->:")
-    if input == 'M':  # char M for message encryption
-        print '\n' * 40
-        while True:
-            message = raw_input("\nTo Go Back Enter-1\n"
-                                "Enter Message: ")
-            if message == "1":
-                break
+    while True:
+        print '\n' * 3
+        message = raw_input("Enigma M3 Machine (To Exit Enter-1)\n"
+                            "=================\n"
+                            "Enter Message:")
+        if message == '1':  # char 1 for exit from the program
+            sys.exit(0)
 
-            encryptedMessage = ''
-            for letter in message:
-                if letter == ' ':
-                    encryptedMessage += ' '
-                    continue
-                encryptedMessage += enigma.encryptLetter(letter)
-            print "Encrypted Message:", encryptedMessage
-
-    elif input == 'L':  # char L for letter encryption
-        print '\n'*40
-        while True:
-            letter = raw_input("\nTo Go Back Enter-1\n"
-                               "Enter Letter:")
-            if letter == "1":
-                break
-
-            encryptedLetter = enigma.encryptLetter(letter)
-            print "encrypted letter:", encryptedLetter
-
-    elif input == 'E':  # char E for exit from the program
-        sys.exit(0)
+        encryptedMessage = ''
+        for letter in message:
+            if letter == ' ':
+                encryptedMessage += ' '
+                continue
+            encryptedMessage += enigma.encryptLetter(letter)
+        print "Encrypted Message:", encryptedMessage
 
     profile.disable()
-    print '\n' * 40
+    print '\n' * 10
     profile.print_stats(sort='time') # print the profile result
     break
 
