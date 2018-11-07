@@ -10,8 +10,10 @@ while True:
     profile.enable()
 
     # enigma machine creation
-    # Enigma(right rotor number, right rotor setting, right rotor offset, middle rotor number, ...., optional 10 pairs to plugboard)
-    enigma = Enigma(1, 1, 1, 2, 1, 1, 3, 1, 1, [])
+    enigma = Enigma(4, 24, 18, # right rotor, setting, offset
+                    5, 9, 15,  # middle rotor, setting, offset
+                    2, 19, 4,  # left rotor, setting, offset
+                    [('Z','U'),('H','L'),('C','Q'),('W','M'),('O','A'),('P','Y'),('E','B'),('T','R'),('D','N'),('V','I')])  # optional 10 pairs to plugboard
 
     # user interface handling
     input = raw_input("Enigma M3 Machine\n"
@@ -31,6 +33,7 @@ while True:
             encryptedMessage = ''
             for letter in message:
                 if letter == ' ':
+                    encryptedMessage += ' '
                     continue
                 encryptedMessage += enigma.encryptLetter(letter)
             print "Encrypted Message:", encryptedMessage
@@ -51,7 +54,7 @@ while True:
 
     profile.disable()
     print '\n' * 40
-    profile.print_stats(sort='time')
+    profile.print_stats(sort='time') # print the profile result
     break
 
 
